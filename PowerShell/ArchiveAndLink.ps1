@@ -7,21 +7,27 @@
 	files are moved to a secondary storage location, and a symlink is created to the new file location.
 	
 .NOTES
-	Version:		1.0
-	Author:			Robbie Crash
-	Written: 		2014-02-13
+	Version:	1.0
+	Author:		Robbie Crash
+	Written: 	2014-02-13
 	Version Notes:	Initial script.
 	
-	REQUIRES: 		This script requires that you set SymlinkEvaluation to allow remote transversal. You can do this 
-					by opening an admin command prompt and running the following command:
-						fsutil behavior set SymlinkEvaluation r2r:1
-					You can verify this worked by running:
-						fsutil behavior query SymlinkEvaluation
-					This behaviour can also be set via GPO:
-						Computer Configuration > Policies > Administrative Templates > System > File System >
-							Selectively allow the evaluation of a symbolic link
-						Then set Remote to Remote to Enabled.						
+	REQUIRES: 	This script requires that you set SymlinkEvaluation to allow transversal across disks. 
+			You can do this by opening an admin command prompt and running the following command:
+				fsutil behavior set SymlinkEvaluation r2r:1
+			You can verify this worked by running:
+				fsutil behavior query SymlinkEvaluation
+			This behaviour can also be set via GPO:
+			Computer Configuration > Policies > Administrative Templates > System > File System:
+						Selectively allow the evaluation of a symbolic link
+			Then set "Remote to Remote" to Enabled.						
 	
+			It requires the PowerShell Community Extensions (PSCX) module be imported to hash the 
+			files.
+			
+			It requires the symlink module to create the symlinks.
+	
+	To Do:		Update to version 5+ PowerShell and use builtin Get-FileHash, and New-Item -Symlink				
 .LINK
 	https://robbiecrash.me/scriptz/ArchiveAndLink.ps1
 #>
